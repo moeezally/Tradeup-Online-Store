@@ -1,0 +1,49 @@
+<div>
+  <div class="container">
+    <div class="ll-section-head text-center mb-5">
+      <h3 class="ll-section-head__heaidng">Our Featured Products:</h3>
+      <h4 class="ll-section-head__subheading">Just a bird's eye view of the range of products we offer</h4>
+    </div>
+    <div class="grid grid-cols-12 gap-6 xxl:gap-8">
+      <div *ngFor="let product of featuredProducts" class="col-span-12 md:col-span-6 xl:col-span-3">
+        <mat-card class="ll-product">
+          <img
+            mat-card-image
+            src="../../../assets/images/products/02-1.png"
+            alt="{{ product.name }}"
+            style="width: 100%; margin: 0 0 20px"
+          />
+          <mat-card-content class="flex">
+            <div class="flex-none w-10">
+              <img src="../../../assets/images/avatar.png" alt="{{ product.name }}" />
+            </div>
+            <div class="flex-grow pl-3">
+              <h4 class="product__creator"></h4>
+              <h2 class="product__name">
+                <a [routerLink]="['products', product.id]">{{ product.name }}</a>
+              </h2>
+              <div class="flex justify-between mt-5">
+                <div class="product__name text-accent">Price: Rs. {{ product.cost }}</div>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions class="product__action flex justify-between">
+            <div class="flex-1 text-center flex items-center justify-center">
+              <mat-icon color="warn">star</mat-icon> 5/5
+            </div>
+            <div class="flex-1 text-center">
+              <a mat-raised-button color="warn" class="px-4" (click)="addToCart(product)">Add to Cart</a>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+    <div class="text-center mt-10">
+      <a mat-raised-button color="accent" class="px-8 py-2 text-lg" [routerLink]="['products']">Browse More</a>
+    </div>
+  </div>
+</div>
+
+<!-- ../../../assets/images/products/02-1.png -->
+
+<!-- ../../../assets/images/products/02-1.png -->

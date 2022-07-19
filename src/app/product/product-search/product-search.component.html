@@ -1,0 +1,30 @@
+<div class="mt-3 flex">
+  <input
+    type="text"
+    placeholder="I am looking for ..."
+    class="flex-1 w-full sm:text-sm lg:text-xl border-gray-300 rounded-l-md py-3 px-6"
+    [(ngModel)]="searchText"
+  />
+
+  <button class="bg-primary w-24 rounded-r-md"><mat-icon class="leading-8">search</mat-icon></button>
+</div>
+<!-- <div *ngIf="searchText">
+  <ul>
+    <li class="item" *ngFor="let item of searchList | SearchFilter: searchText">
+      <a [routerLink]="['products', item.id]">{{ item.name }}</a>
+    </li>
+  </ul>
+</div> -->
+<mat-card *ngIf="searchText" style="border-color: #538fff; border-width: 0.5px; border-top-color: #fff">
+  <cdk-virtual-scroll-viewport itemSize="50" class="flex-1 w-full sm:text-sm lg:text-xl example-viewport">
+    <ul>
+      <li
+        *cdkVirtualFor="let item of searchList | SearchFilter: searchText"
+        class="item"
+        [routerLink]="['/home/products', item.id]"
+      >
+        <span>{{ item.name }}</span>
+      </li>
+    </ul>
+  </cdk-virtual-scroll-viewport>
+</mat-card>

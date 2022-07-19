@@ -1,0 +1,172 @@
+<div *ngIf="isLoading == false" class="ll-hero container">
+  <h1 class="mb-5">Checkout</h1>
+  <div class="grid grid-cols-12 gap-8">
+    <form class="col-span-12 md:col-span-7 xl:col-span-8 border p-10">
+      <h1 class="text-2xl font-bold">Fill Required Information</h1>
+      <div class="mb-4 mt-6">
+        <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Full Name</label>
+        <input
+          pInputText
+          class="
+            text-sm
+            appearance-none
+            rounded
+            w-full
+            py-2
+            px-3
+            text-gray-700
+            bg-gray-100
+            leading-tight
+            focus:outline-none
+            focus:shadow-outline
+            h-10
+          "
+          [(ngModel)]="OrderObj.name"
+          id="fullName"
+          type="text"
+          name="fullName"
+          placeholder="Enter your full name"
+          required
+          disabled
+        />
+      </div>
+      <div class="mb-6 mt-6">
+        <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="password"> Email </label>
+        <input
+          pInputText
+          required
+          class="
+            text-sm
+            bg-gray-100
+            appearance-none
+            rounded
+            w-full
+            py-2
+            px-3
+            text-gray-700
+            mb-1
+            leading-tight
+            focus:outline-none
+            focus:shadow-outline
+            h-10
+          "
+          [(ngModel)]="OrderObj.email"
+          id="email"
+          type="email"
+          placeholder="Enter your email"
+          name="email"
+          disabled
+        />
+      </div>
+      <div class="mb-4 mt-6">
+        <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="address"> Address</label>
+        <input
+          pInputText
+          class="
+            text-sm
+            appearance-none
+            rounded
+            w-full
+            py-2
+            px-3
+            text-gray-700
+            bg-gray-100
+            leading-tight
+            focus:outline-none
+            focus:shadow-outline
+            h-10
+          "
+          [(ngModel)]="OrderObj.delivery_address"
+          id="address"
+          type="text"
+          name="address"
+          placeholder="Enter the delivery addrress"
+          required
+        />
+      </div>
+      <div class="mb-4 mt-6">
+        <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="PhoneNumber"> Phone Number</label>
+        <input
+          pInputText
+          class="
+            text-sm
+            appearance-none
+            rounded
+            w-full
+            py-2
+            px-3
+            text-gray-700
+            bg-gray-100
+            leading-tight
+            focus:outline-none
+            focus:shadow-outline
+            h-10
+          "
+          [(ngModel)]="OrderObj.phoneNumber"
+          id="PhoneNumber"
+          type="text"
+          name="PhoneNumber"
+          placeholder="Enter your phone number"
+          required
+        />
+      </div>
+    </form>
+    <div class="col-span-12 md:col-span-5 xl:col-span-4">
+      <div class="border bill rounded-md">
+        <div class="border-b text-center pt-10 pb-10">
+          <span class="text-white text-3xl font-semibold">Totol Bill Payable: </span>
+          <span class="text-black text-3xl font-semibold bg-white rounded-md p-2">Rs. {{ TotalCartPrice }}</span>
+        </div>
+        <div class="border-b p-5 b2">
+          <ul class="service-info">
+            <li class="py-2 mr-2">
+              <div class="flex items-center">
+                <mat-icon class="text-primary border-2 rounded-full w-6 h-6 text-center leading-5 mr-2">check</mat-icon>
+                <strong class="mr-2 font-black">48 hours</strong> delivery time
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="border-b px-5 pt-10 pb-12 text-center">
+          <button
+            mat-flat-button
+            class="py-3 px-20 text-xl font-bold"
+            color="warn"
+            (click)="placeOrder()"
+            [routerLink]="['/home/profile/orders']"
+          >
+            Place Order
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="grid grid-cols-12 gap-8">
+    <div class="col-span-12 md:col-span-7 xl:col-span-8 border p-5">
+      <h1 class="text-2xl font-bold">Order being placed for products...</h1>
+      <ol class="m-2" style="list-style-type: decimal-leading-zero">
+        <li
+          class="m-4"
+          *ngFor="let cartItem of Local_Storage | paginate: { itemsPerPage: ItemsPerPage, currentPage: Page }"
+        >
+          <!-- <mat-card class="ll-product"> -->
+          <img
+            src="../../../assets/images/products/02-1.png"
+            alt="{{ cartItem.product.name }}"
+            class="w-24 inline ml-2 mr-4 p-1"
+          />
+          <h5 class="product__name inline ml-2 mr-2 p-1">
+            <a [routerLink]="['/home/products', cartItem.product.id]">{{ cartItem.product.name }}</a>
+          </h5>
+          <h6 class="ll-product__name text-accent inline ml-2 mr-2 p-1">Price: Rs. {{ cartItem.product.cost }}</h6>
+          <hr />
+        </li>
+      </ol>
+      <div class="mt-5">
+        <hr />
+        <pagination-controls (pageChange)="Page = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

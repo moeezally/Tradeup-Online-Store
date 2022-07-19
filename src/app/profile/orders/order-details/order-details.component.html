@@ -1,0 +1,83 @@
+<div *ngIf="isLoading == false" class="ll-hero container">
+  <h1 class="mb-5">Order Details</h1>
+  <div class="grid grid-cols-12 gap-8">
+    <mat-card class="col-span-12 md:col-span-7 xl:col-span-8 border p-5">
+      <h4 class="_title font-medium mb-3">
+        Order By:
+        <h1 class="_title font-medium mb-3 inline">{{ user.name }}</h1>
+      </h4>
+      <hr />
+      <div class="content mt-8">
+        <p class="mt-3" style="font-size: 17px">
+          <br />
+          <strong>Order Id:</strong> {{ order.id }}<br /><br />
+          <strong>Order Price:</strong> {{ order.orderPrice }}<br /><br />
+          <strong>Mobile Number:</strong> {{ user.mobile_number }} <br /><br />
+          <strong>Delivery Address:</strong> {{ order.deliveryAddress }} <br /><br />
+          <strong>Number of Items:</strong> {{ order.numberOfItems }} <br /><br />
+          <!-- <strong>Number of Products Bought from Tradeup:</strong> {{ productsBought }} <br /> -->
+        </p>
+      </div>
+      <hr />
+      <h4 class="_title font-medium mb-3 mt-3">Order Items</h4>
+      <table class="table table-bordered table-responsive-md table-responsive-sm table-hover">
+        <thead>
+          <tr class="text-left" style="background-color: rgba(216, 216, 216, 0.5)">
+            <th>
+              <span class="text-gray">Id</span>
+            </th>
+            <th>
+              <span class="text-gray">Name</span>
+            </th>
+            <th>
+              <span class="text-gray">Product Price</span>
+            </th>
+
+            <th>
+              <span class="text-gray">Quantity</span>
+            </th>
+            <th>
+              <span class="text-right">Total Price</span>
+            </th>
+
+            <!-- <th class="text-right">Action</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let orderItem of order.orderItems">
+            <td>
+              <a class="text-primary">#{{ orderItem?.product.id }}</a>
+            </td>
+            <td [routerLink]="['/home/products', orderItem.product.id]" style="cursor: pointer">
+              {{ orderItem?.product.name }}
+            </td>
+            <td>
+              <span>Rs.{{ orderItem?.product.cost }}</span>
+            </td>
+            <td>
+              <span>{{ orderItem?.quantity }}</span>
+            </td>
+            <td>
+              <span>{{ orderItem?.price }}</span>
+            </td>
+            <!-- <td class="text-right">
+            <button class="action_icon__btn" mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xposition="before">
+              <button mat-menu-item>
+                <mat-icon>dialpad</mat-icon>
+                <span>Details</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </td> -->
+          </tr>
+        </tbody>
+      </table>
+    </mat-card>
+  </div>
+</div>
